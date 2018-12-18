@@ -7,10 +7,12 @@
 		@font-face { font-family: thaana; src: url('fonts/MvEamaanXP.woff'); font-weight: bold;}
 		@font-face { font-family: thaana; src: url('fonts/MVDawla.woff');}
 		html, body { margin: 0; padding: 0; }
+		a { text-decoration:none; color: #FFF; }
 		.left { float: left; } .right { float: right; } .clear { clear: both; }
 		.btn { border: 1px solid #EEE; border-radius: 5px; padding: 2px 20px 6px 20px; }
 		#header { font-family: thaana; font-weight: bold; direction: rtl; color: #FFF;  font-size: 20px; position: fixed; top: 0; height: 60px; width: 100%; background: #333; }
 		.name, .btn-done { margin: 10px 20px 0 20px; }
+		.btn-download { margin: 10px 0px 0 0px; }
 		#content { margin: 61px auto; font-family: thaana; font-size: 19px; direction: rtl; width: 80%; }
 		textarea { width: 100%; }
 		#canvas-wrap { margin: 65px auto; width: 80%; }
@@ -18,7 +20,7 @@
 	</style>
 </head>
 <body>
-	<div id="header"><div id="faadhi" class="name right">ފާދި</div><div id="btn-done" class="btn btn-done left">ނިމުނީ</div></div>
+	<div id="header"><div id="faadhi" class="name right">ފާދި</div><div id="btn-done" class="btn btn-done left">ނިމުނީ</div><div id="btn-download" ><a href="#" download="file.png" class="btn btn-download left">ޑައުންލޯޑް</a></div></div>
 	<img style="display:none;" src="faadhi.png"/>
 	<img style="display:none;" src="faa.png"/>
 	<div id="content">
@@ -39,11 +41,16 @@
 		// A5 size 847X1240	
 		var btnMain = document.getElementById("faadhi");
 		var btnDone = document.getElementById("btn-done");
+		var btnDownload = document.getElementById("btn-download");
+		var down = btnDownload.getElementsByTagName("a")[0];
 		var content = document.getElementById('content');
 		var canvas = document.getElementById('canvas');
+		var canvasWrap = document.getElementById('canvas-wrap');
 		var lineHeight = 90;
 		var fulhaamin = 520;
+
 		canvas.style.display="none";
+		btnDownload.style.display="none";
 
 		function fillWord(ctx, word){
 			wordlines = word.split("\n");
@@ -109,6 +116,7 @@
 				ctx.fillStyle = "#4b4b4b";
 				ctx.fillRect(0,lineHeight,canvas.width,lineHeight+80);
 				ctx.drawImage(image2, 650, (lineHeight+7));
+				
 			}
 		}
 		
@@ -123,6 +131,10 @@
 			canvas.height = 600;
 			nimuny();
 			canvas.style.display="block";	
+			dt = canvas.toDataURL("image/png");			
+			dt = dt.replace('image/png',"application/octet-stream");			
+			down.setAttribute("href",dt);
+			btnDownload.style.display="block";
 		});
 	</script>
 </body>
