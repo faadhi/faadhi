@@ -4,11 +4,12 @@
 	<meta charset="UTF-8">
 	<title>faadhi</title>
 	<style type="text/css">
-		@font-face { font-family: thaana; src: url('fonts/MvEamaanXP.woff'); }
+		@font-face { font-family: thaana; src: url('fonts/MvEamaanXP.woff'); font-weight: bold;}
+		@font-face { font-family: thaana; src: url('fonts/MVDawla.woff');}
 		html, body { margin: 0; padding: 0; }
 		.left { float: left; } .right { float: right; } .clear { clear: both; }
 		.btn { border: 1px solid #EEE; border-radius: 5px; padding: 2px 20px 6px 20px; }
-		#header { font-family: thaana; direction: rtl; color: #FFF;  font-size: 20px; position: fixed; top: 0; height: 60px; width: 100%; background: #333; }
+		#header { font-family: thaana; font-weight: bold; direction: rtl; color: #FFF;  font-size: 20px; position: fixed; top: 0; height: 60px; width: 100%; background: #333; }
 		.name, .btn-done { margin: 10px 20px 0 20px; }
 		#content { margin: 61px auto; font-family: thaana; font-size: 19px; direction: rtl; width: 80%; }
 		textarea { width: 100%; }
@@ -70,7 +71,7 @@
 				var answer = document.getElementsByTagName("textarea")[1].value;
 				var ctx = canvas.getContext('2d');
 				ctx.fillStyle = "black";
-				ctx.font = "22px thaana";
+				ctx.font = "bold 24px thaana";
 				ctx.fillText("ސުވާލު:", 820, lineHeight);
 				suvaaluHeight = lineHeight + 70;
 				lineHeight += 35;
@@ -79,6 +80,7 @@
 				lineHeight +=65;
 				ctx.fillText("ޖަވާބު:", 820, lineHeight);
 				lineHeight += 35;
+				ctx.font = "22px thaana";
 				fillWord(ctx, answer);
 				lineHeight += 35;
 				canvas.height = lineHeight + 80;				
@@ -94,13 +96,14 @@
 				ctx.fillRect(0,0,canvas.width,suvaaluHeight);
 				ctx.drawImage(image, 0, 0);
 				ctx.fillStyle = "black";
-				ctx.font = "22px thaana";
+				ctx.font = "bold 24px thaana";
 				ctx.fillText("ސުވާލު:", 820, lineHeight);
 				lineHeight += 35;
 				fillWord(ctx, question);
 				lineHeight +=65;
 				ctx.fillText("ޖަވާބު:", 820, lineHeight);
 				lineHeight += 35;
+				ctx.font = "22px thaana";
 				fillWord(ctx, answer);	
 				lineHeight += 35;
 				ctx.fillStyle = "#4b4b4b";
