@@ -1,7 +1,127 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 <html>
+<head>
+	<meta charset="UTF-8">
+	<title>faadhi</title>
+	<style type="text/css">
+		@font-face { font-family: thaana; src: url('fonts/MvEamaanXP.woff'); }
+		html, body { margin: 0; padding: 0; }
+		.left { float: left; } .right { float: right; } .clear { clear: both; }
+		.btn { border: 1px solid #EEE; border-radius: 5px; padding: 2px 20px 6px 20px; }
+		#header { font-family: thaana; direction: rtl; color: #FFF;  font-size: 20px; position: fixed; top: 0; height: 60px; width: 100%; background: #333; }
+		.name, .btn-done { margin: 10px 20px 0 20px; }
+		#content { margin: 61px auto; font-family: thaana; font-size: 19px; direction: rtl; width: 80%; }
+		textarea { width: 100%; }
+		#canvas-wrap { margin: 65px auto; width: 80%; }
+		#canvas { width: 100%; }
+	</style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+	<div id="header"><div id="faadhi" class="name right">ފާދި</div><div id="btn-done" class="btn btn-done left">ނިމުނީ</div></div>
+	<img style="display:none;" src="faadhi.png"/>
+	<img style="display:none;" src="faa.png"/>
+	<div id="content">
+		<div class="suvaalu">
+			<div class="label">ސުވާލު:</div>
+			<div class="input"><textarea></textarea></div>
+		</div>
+		<div class="javaabu">
+			<div class="label">ޖަވާބު:</div>
+			<div class="input"><textarea style="height:100%;"></textarea></div>
+		</div>
+	</div>
+	<div id="canvas-wrap" style="border:1px solid #CCC;">
+		<canvas id="canvas" width="874" height="200" dir="rtl"></canvas>
+	</div>
+
+	<script type="text/javascript">
+		// A5 size 847X1240	
+		var btnMain = document.getElementById("faadhi");
+		var btnDone = document.getElementById("btn-done");
+		var content = document.getElementById('content');
+		var canvas = document.getElementById('canvas');
+		var lineHeight = 90;
+		var fulhaamin = 520;
+		canvas.style.display="none";
+
+		function fillWord(ctx, word){
+			wordlines = word.split("\n");
+			for ( j=0; j < wordlines.length; j++ ) {
+					words = wordlines[j].split(" ");
+					wordTemp = "";
+					for (i=0; i < words.length; i++){
+						wordTemp += words[i]+" ";
+						if (ctx.measureText(wordTemp).width > fulhaamin){
+							ctx.fillText(wordTemp.trim(), 820, lineHeight);
+							lineHeight +=35;
+							wordTemp = "";
+						}
+					}
+					ctx.fillText(wordTemp.trim(), 820, lineHeight);
+					lineHeight +=35;
+			}	
+		}
+
+		function nimuny(){
+			if ( canvas.getContext ) {
+				var qText = "ސުވާލު:"
+				var qNo = "2";
+				var question = document.getElementsByTagName("textarea")[0].value;
+				var answer = document.getElementsByTagName("textarea")[1].value;
+				var ctx = canvas.getContext('2d');
+				ctx.fillStyle = "black";
+				ctx.font = "22px thaana";
+				ctx.fillText("ސުވާލު:", 820, lineHeight);
+				suvaaluHeight = lineHeight + 70;
+				lineHeight += 35;
+				fillWord(ctx, question);
+				suvaaluHeight = lineHeight;
+				lineHeight +=65;
+				ctx.fillText("ޖަވާބު:", 820, lineHeight);
+				lineHeight += 35;
+				fillWord(ctx, answer);
+				lineHeight += 35;
+				canvas.height = lineHeight + 80;				
+
+				lineHeight = 90;
+				var ctx = canvas.getContext('2d');
+				var image = document.images[0];
+				var image2 = document.images[1];
+			
+				ctx.fillStyle = "#FAFAFA";
+				ctx.fillRect(0,0,canvas.width,canvas.height);
+				ctx.fillStyle = "#fdfdfd";
+				ctx.fillRect(0,0,canvas.width,suvaaluHeight);
+				ctx.drawImage(image, 0, 0);
+				ctx.fillStyle = "black";
+				ctx.font = "22px thaana";
+				ctx.fillText("ސުވާލު:", 820, lineHeight);
+				lineHeight += 35;
+				fillWord(ctx, question);
+				lineHeight +=65;
+				ctx.fillText("ޖަވާބު:", 820, lineHeight);
+				lineHeight += 35;
+				fillWord(ctx, answer);	
+				lineHeight += 35;
+				ctx.fillStyle = "#4b4b4b";
+				ctx.fillRect(0,lineHeight,canvas.width,lineHeight+80);
+				ctx.drawImage(image2, 650, (lineHeight+7));
+			}
+		}
+		
+		btnMain.addEventListener("click", function() {
+			canvas.style.display="none";
+			content.style.display="block";	
+		});
+
+		btnDone.addEventListener("click", function(){
+			content.style.display="none";
+			lineHeight = 100;
+			canvas.height = 600;
+			nimuny();
+			canvas.style.display="block";	
+		});
+	</script>
 </body>
 </html>
+
